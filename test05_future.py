@@ -1,6 +1,7 @@
 import asyncio
 from faker import Faker
 from time import sleep, time
+import Timing
 
 fake = Faker("uk-UA")
 
@@ -16,6 +17,7 @@ def make_request(uuid: int) -> asyncio.Future:
     return future
 
 
+@Timing.async_timed("Check Time")
 async def main():
     users = []
     for i in range(1, 6):
@@ -27,7 +29,5 @@ async def main():
 
 
 if __name__ == "__main__":
-    start = time()
     users = asyncio.run(main())
     print(users)
-    print(time() - start)
